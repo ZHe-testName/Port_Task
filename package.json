@@ -1,0 +1,35 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "My test task for Onseo company",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server --mode development"
+  },
+  "keywords": [],
+  "author": "Ejen",
+  "license": "ISC",
+  "devDependencies": {
+    "copy-webpack-plugin": "^10.2.0",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.4",
+    "webpack": "^5.66.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.3"
+  },
+  "dependencies": {
+    "@types/pixi.js": "^5.0.0",
+    "pixi.js": "^5.3.11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZHe-testName/Port_Task.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ZHe-testName/Port_Task/issues"
+  },
+  "homepage": "https://github.com/ZHe-testName/Port_Task#readme"
+}
