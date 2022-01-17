@@ -1,14 +1,13 @@
 import Interface from "./components/component1";
 import * as PIXI from 'pixi.js';
 
-// The application will create a renderer using WebGL, if possible,
-// with a fallback to a canvas render. It will also setup the ticker
-// and the root stage PIXI.Container.
+//Created app
 const app = new PIXI.Application({
     width: 900,
     height: 580,
     backgroundColor: 0xAAAFFF,
 });
+document.body.appendChild(app.view);
 
 app.view.style.margin = '0px auto';
 app.view.style.display = "block";
@@ -16,6 +15,7 @@ app.view.style.marginTop = '50px';
 app.view.style.border = '4px solid black';
 app.view.style.borderRight = 'none';
 
+//Gate lines setungs
 const line1 = new PIXI.Graphics();
 
 line1.lineStyle(10, 0xd5402b, 1);
@@ -33,7 +33,7 @@ line2.lineStyle(10, 0xd5402b, 1);
 
 line2.position.x = app.renderer.width / 2.5;
 line2.position.y = app.renderer.height / 3;
-line2.pivot.set(0, -170)
+line2.pivot.set(0, -180)
 
 line2.moveTo(0, 0);
 line2.lineTo(0, 220);
@@ -41,33 +41,25 @@ line2.lineTo(0, 220);
 app.stage.addChild(line1);
 app.stage.addChild(line2);
 
-document.body.appendChild(app.view);
- 
-// The application will create a canvas element for you that you
-// can then insert into the DOM.
- 
-// load the texture we need
-// app.loader.add('bunny', './img/player.png').load((loader: any, resources: any) => {
- 
-//     // This creates a texture from a 'bunny.png' image.
-//     const bunny = new PIXI.Sprite(resources.bunny.texture);
- 
-//     // Setup the position of the bunny
-//     bunny.x = app.renderer.width / 2;
-//     bunny.y = app.renderer.height / 2;
- 
-//     // Rotate around the center
-//     bunny.anchor.x = 0;
-//     bunny.anchor.y = 0.5;
- 
-//     // Add the bunny to the scene we are building.
-//     app.stage.addChild(bunny);
- 
-//     // Listen for frame updates
-//     app.ticker.add(() => {
-//          // each frame we spin the bunny around a bit
-//         bunny.rotation += 0.06;
-//     });
-// });
+//Created pier container with 4 piers and position it on the sea
+const container = new PIXI.Container();
 
-console.log(Interface.madTwo(2, 5));
+app.stage.addChild(container);
+
+const texture = PIXI.Texture.from('./img/Pier.png');
+
+for (let i = 1; i <= 4; i++){
+    const pier = new PIXI.Sprite(texture);
+        pier.anchor.set(0.5);
+        pier.x = 50;
+        pier.y = i * 130;
+
+        container.addChild(pier);
+};
+
+container.x = 0;
+container.y = 160;
+
+
+container.pivot.x = container.width / 2;
+container.pivot.y = container.height / 2;
