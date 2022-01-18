@@ -70,6 +70,16 @@ container.pivot.x = container.width / 2;
 container.pivot.y = container.height / 2;
 
 //Ceating boats
+const boatsContainer = new PIXI.Container();
+
+boatsContainer.x = 0;
+boatsContainer.y = 0;
+
+boatsContainer.width = app.renderer.width;
+boatsContainer.height = app.renderer.height;
+
+app.stage.addChild(boatsContainer);
+
 const intervalId = setInterval(() => {
     const texture = PIXI.Texture.from('./img/EmptyGreenBoat.png');
     const boat = new PIXI.Sprite(texture);
@@ -78,20 +88,43 @@ const intervalId = setInterval(() => {
     boat.x = app.renderer.width;
     boat.y = app.renderer.height / 2 - 70;
 
+    boatsContainer.addChild(boat);
+    console.log(boatsContainer.children[boatsContainer.children.length - 2]);
     app.ticker.add(() => {
-        if(boat.x === 450){
-            boat.x -= 0;
+        if(boatsContainer.children.length === 1){
+            if(boat.x === 450){
+                boat.x -= 0;
 
-            return;
+                return;
+            }
         }
+        
+        if(boatsContainer.children.length >= 2){
+            //@ts-ignore
+            if(boat.x === 450 || boatsIntersect(boatsContainer.children[boatsContainer.children.length - 2], boat)){
+                boat.x -= 0;
+    
+                return;
+            }
+        };
 
+  
+        console.log('move');
         boat.x -= spead;
     });
 
-    app.stage.addChild(boat);
-    console.log(app.stage.children);
 }, 8000);
 
 setTimeout(() => clearInterval(intervalId), 48000);
+
+function boatsIntersect (a: PIXI.Sprite, b: PIXI.Sprite){
+    let aBox = a.getBounds();
+    let bBox = b.getBounds();
+
+    return aBox.x + aBox.width + 10 > bBox.x &&
+        aBox.x < bBox.x + bBox.width &&
+        aBox.y + aBox.height > bBox.y &&
+        aBox.y < bBox.y + bBox.height;
+};
 
 console.log(Math.floor(Math.random() * 2));
