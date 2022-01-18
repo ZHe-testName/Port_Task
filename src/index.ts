@@ -1,5 +1,8 @@
-import Interface from "./components/component1";
-import * as PIXI from 'pixi.js';
+// import './components/app';
+// import './resources/resources';
+// import './visual/visual';
+// import './components/world';
+import * as PIXI from "pixi.js";
 
 //Created app
 const app = new PIXI.Application({
@@ -9,13 +12,15 @@ const app = new PIXI.Application({
 });
 document.body.appendChild(app.view);
 
+const spead = 2;
+
 app.view.style.margin = '0px auto';
 app.view.style.display = "block";
 app.view.style.marginTop = '50px';
 app.view.style.border = '4px solid black';
 app.view.style.borderRight = 'none';
 
-//Gate lines setungs
+//Gate lines setings
 const line1 = new PIXI.Graphics();
 
 line1.lineStyle(10, 0xd5402b, 1);
@@ -63,3 +68,30 @@ container.y = 160;
 
 container.pivot.x = container.width / 2;
 container.pivot.y = container.height / 2;
+
+//Ceating boats
+const intervalId = setInterval(() => {
+    const texture = PIXI.Texture.from('./img/EmptyGreenBoat.png');
+    const boat = new PIXI.Sprite(texture);
+
+    boat.anchor.set(0.5);
+    boat.x = app.renderer.width;
+    boat.y = app.renderer.height / 2 - 70;
+
+    app.ticker.add(() => {
+        if(boat.x === 450){
+            boat.x -= 0;
+
+            return;
+        }
+
+        boat.x -= spead;
+    });
+
+    app.stage.addChild(boat);
+    console.log(app.stage.children);
+}, 8000);
+
+setTimeout(() => clearInterval(intervalId), 48000);
+
+console.log(Math.floor(Math.random() * 2));
